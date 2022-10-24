@@ -28,7 +28,6 @@ class LoginPage {
         this.setEmail(email);
         this.setPwd(pwd);
         this.click();
-        clearBrowserCookies();
         /* Используем try-catch так как в тесте, где мы вводим неверный пароль мы не сможем проверить
         ExpectedUsername потому что мы не сможем зайти на страницу пользователя => выкидываем False.
         Иначе тест не пройдёт даже с логически верным ожиданием (ввели неверный пароль => не смогли залогиниться). */
@@ -39,5 +38,6 @@ class LoginPage {
         {
             assertFalse(expectedResult);
         }
+        clearBrowserCookies();
     }
 }
