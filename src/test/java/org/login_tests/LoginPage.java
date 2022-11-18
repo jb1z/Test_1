@@ -3,35 +3,36 @@ package org.login_tests;
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Selenide.$;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 class LoginPage {
     // setters
-    private void setEmail(String email){
+    public LoginPage setEmail(String email){
         $(By.xpath("//*[@id='field_email']")).setValue(email);
+        return this;
     }
-    private void setPwd(String pwd){
+    public LoginPage setPwd(String pwd){
         $(By.xpath("//*[@id=\"field_password\"]")).setValue(pwd);
+        return this;
     }
-    // action on page
-    private void click(){
 
+    // action on page
+    public LoginPage click(){
         $(By.xpath("//div[@class=\"login-form-actions\"]/input")).click();
+        return this;
     }
+
     // takers
     private String takeUserName(){
         return $(By.xpath("//div[@class=\"tico ellip\"]")).text();
     }
-    public void checkUsername(String email, String pwd, String expectedUsername){
-        this.setEmail(email);
-        this.setPwd(pwd);
-        this.click();
+
+    // checkers
+    public void checkUsername(String expectedUsername){
         assertEquals(expectedUsername, this.takeUserName());
     }
-    public void checkNotLogged(String email, String pwd, boolean expectedResult){
-        this.setEmail(email);
-        this.setPwd(pwd);
-        this.click();
+    public void checkNotLogged(boolean expectedResult){
         assertFalse(expectedResult);
     }
 }
