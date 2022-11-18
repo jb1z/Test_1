@@ -1,7 +1,6 @@
-package org.example;
+package org.login_tests;
 
 import static com.codeborne.selenide.Selenide.clearBrowserCookies;
-import static com.codeborne.selenide.Selenide.open;
 
 public class BaseTest {
     public void open(String s){

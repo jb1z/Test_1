@@ -7,7 +7,11 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="Test_1" />
+        <module name="selenide-junit5-archetype" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="Tests" target="18" />
+    </bytecodeTargetLevel>
   </component>
 </project>

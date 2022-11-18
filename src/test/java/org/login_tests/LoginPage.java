@@ -1,9 +1,7 @@
-package org.example;
+package org.login_tests;
 
-import com.codeborne.selenide.ex.ElementNotFound;
 import org.openqa.selenium.By;
 
-import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Selenide.$;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -17,28 +15,23 @@ class LoginPage {
     }
     // action on page
     private void click(){
-        $(By.xpath("//*[@id=\"anonymPageContent\"]/div/div[1]/div[2]/div/div[2]/div[2]/div[1]/form/div[4]/input")).click();
+
+        $(By.xpath("//div[@class=\"login-form-actions\"]/input")).click();
     }
     // takers
     private String takeUserName(){
-        return $(By.xpath("//*[@id=\"hook_Block_Navigation\"]/div/div/div[1]/a/div")).text();
+        return $(By.xpath("//div[@class=\"tico ellip\"]")).text();
     }
-    public void loginMethod(String email, String pwd, String expectedUsername, boolean expectedResult){
-        BaseTest base = new BaseTest();
-        base.open("https://ok.ru");
+    public void checkUsername(String email, String pwd, String expectedUsername){
         this.setEmail(email);
         this.setPwd(pwd);
         this.click();
-        /* Используем try-catch так как в тесте, где мы вводим неверный пароль мы не сможем проверить
-        ExpectedUsername потому что мы не сможем зайти на страницу пользователя => выкидываем False.
-        Иначе тест не пройдёт даже с логически верным ожиданием (ввели неверный пароль => не смогли залогиниться). */
-        try {
-            assertEquals(expectedUsername, this.takeUserName());
-        }
-        catch (ElementNotFound e)
-        {
-            assertFalse(expectedResult);
-        }
-        base.close();
+        assertEquals(expectedUsername, this.takeUserName());
+    }
+    public void checkNotLogged(String email, String pwd, boolean expectedResult){
+        this.setEmail(email);
+        this.setPwd(pwd);
+        this.click();
+        assertFalse(expectedResult);
     }
 }
