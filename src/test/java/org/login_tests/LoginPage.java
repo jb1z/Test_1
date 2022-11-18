@@ -24,7 +24,8 @@ class LoginPage {
         return $(By.xpath("//*[@id=\"hook_Block_Navigation\"]/div/div/div[1]/a/div")).text();
     }
     public void loginMethod(String email, String pwd, String expectedUsername, boolean expectedResult){
-        open("https://ok.ru");
+        BaseTest base = new BaseTest();
+        base.open("https://ok.ru");
         this.setEmail(email);
         this.setPwd(pwd);
         this.click();
@@ -38,6 +39,6 @@ class LoginPage {
         {
             assertFalse(expectedResult);
         }
-        clearBrowserCookies();
+        base.close();
     }
 }
